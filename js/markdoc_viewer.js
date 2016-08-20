@@ -43,7 +43,8 @@
       return obj;
     }
 
-    function request(key, val = null) {
+    function request(key, val) {
+        var val = (arguments[1] === undefined) ? null : arguments[1];
         var query = window.location.search.substring(1);
         var vars = query.split("&");
         for (var i = 0; i < vars.length; i++) {
@@ -59,7 +60,8 @@
         }
     };
 
-    function config(name, def = null) {
+    function config(name, def) {
+        var def = (arguments[1] === undefined) ? null : arguments[1];
         if (request(name) === false) {
             var req_name = localStorage.getItem(name) ? localStorage.getItem(name) : def;
         } else {
@@ -83,7 +85,8 @@
         this.options = merge(this.defaults, opt);
     };
 
-    MarkdocViewer.prototype.marked = function (renderer = new marked.Renderer()) {
+    MarkdocViewer.prototype.marked = function () {
+        var renderer = new marked.Renderer();
         renderer.table = function (header, body) {
             return '<table class="table table-bordered table-striped">\n'
                     + '<thead>\n'
@@ -104,8 +107,6 @@
             smartLists: true,
             smartypants: false,
             langPrefix: 'language-',
-            //这里使用了highlight对代码进行高亮显示
-
             highlight: function (code) {
                 return hljs.highlightAuto(code).value;
             }
