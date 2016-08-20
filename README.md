@@ -60,7 +60,7 @@ MarkdocViewer默认配置如下：
 https://raoyc.com/markdoc-viewer?doc=readme.md&dir=&index=index.md&repo=yascmf/docs&home=readme.md
 
 
-*   [`GitBookIO` 文档](https://github.com/GitbookIO/gitbook/docs)：
+*   [`GitBookIO` 文档](https://github.com/GitbookIO/gitbook/tree/master/docs)：
 
 https://raoyc.com/markdoc-viewer?doc=README.md&dir=docs&index=SUMMARY.md&repo=GitbookIO/gitbook&home=README.md
 
