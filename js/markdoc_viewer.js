@@ -46,7 +46,7 @@
     function request(key, val) {
         var val = (arguments[1] === undefined) ? null : arguments[1];
         var query = window.location.search.substring(1);
-        var vars = query.split("&");
+        var vars = query.split('&');
         for (var i = 0; i < vars.length; i++) {
             var pair = vars[i].split("=");
             if (pair[0] == key) {
@@ -58,7 +58,7 @@
         } else {
             return (false);
         }
-    };
+    }
 
     function config(name, def) {
         var def = (arguments[1] === undefined) ? null : arguments[1];
