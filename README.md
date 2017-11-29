@@ -64,9 +64,6 @@ https://raoyc.com/markdoc-viewer?doc=readme.md&dir=&index=index.md&repo=yascmf/d
 
 https://raoyc.com/markdoc-viewer?doc=README.md&dir=docs&index=SUMMARY.md&repo=GitbookIO/gitbook&home=README.md
 
-*   `Overtrue` 写的 [`building-web-apps-with-laravel5` 文档](https://github.com/overtrue/building-web-apps-with-laravel5)：
-
-https://raoyc.com/markdoc-viewer?doc=README.md&dir=&index=SUMMARY.md&repo=overtrue/building-web-apps-with-laravel5&home=README.md
 
 ## 鸣谢
 
