@@ -124,7 +124,7 @@
             var targetLi = document.querySelector(
                 "#" + sider + ' li a[href="' + href + '"]'
             );
-            if (targetLi.parentElement) {
+            if (targetLi != null && targetLi.parentElement != null) {
                 targetLi.parentElement.setAttribute("class", "active");
             }
         }, 2000);
