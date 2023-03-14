@@ -66,7 +66,7 @@ MarkdocViewer.prototype.marked = function () {
     gfm: true,
     breaks: false,
     pedantic: false,
-    // sanitize: false, //
+    // sanitize: false, // deprecated
     smartLists: true,
     smartypants: false,
     langPrefix: "language-",
