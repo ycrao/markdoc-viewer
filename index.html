@@ -1,19 +1,82 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
-    <meta charset="UTF-8">
-    <title>MarkdocViewer - 单页Markdown文档阅读器</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <link href="css/bootstrap_mdv.css" rel="stylesheet">
-    <link href="css/github-markdown-light.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <title>MarkdocViewer</title>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description"
+        content="markdown document viewer, reading markdown documentation from open git repository (just in one page) " />
+    <meta name="author" content="https://github.com/ycrao/markdoc-viewer" />
+    <link href="css/bootstrap_mdv.css" rel="stylesheet" />
+    <link href="css/github-markdown-light.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.2.12/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet" />
     <script type="text/javascript" src="js/markdoc_viewer.js"></script>
     <style>
-    body{margin:5px auto;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,"Hiragino Sans GB","Microsoft Yahei",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";-webkit-font-smoothing:antialiased}body.md-doc{max-width:none}.docs-wrapper{margin:50px 0}strong{font-weight:700}.docs-nav{padding:10px 0 10px 0}.docs-nav ul{list-style-type:none;list-style-position:inside}.docs-nav ul li{line-height:24px;color:#999;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}.docs-nav ul li>a{color:#999;text-decoration:none}.docs-nav ul li.active a,.docs-nav ul li>a:hover{color:#000}.docs-nav .sider p{font-weight:700}pre{font-family:'Courier New',Courier,monospace}.markdown-body{margin-bottom:50px!important}
+        body {
+            margin: 5px auto;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                Helvetica, "Hiragino Sans GB", "Microsoft Yahei", Arial, sans-serif,
+                "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body.md-doc {
+            max-width: none;
+        }
+
+        .docs-wrapper {
+            margin: 50px 0;
+        }
+
+        strong {
+            font-weight: 700;
+        }
+
+        .docs-nav {
+            padding: 10px 0 10px 0;
+        }
+
+        .docs-nav ul {
+            list-style-type: none;
+            list-style-position: inside;
+        }
+
+        .docs-nav ul li {
+            line-height: 24px;
+            color: #999;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .docs-nav ul li>a {
+            color: #999;
+            text-decoration: none;
+        }
+
+        .docs-nav ul li.active a,
+        .docs-nav ul li>a:hover {
+            color: #000;
+        }
+
+        .docs-nav .sider p {
+            font-weight: 700;
+        }
+
+        pre {
+            font-family: "Courier New", Courier, monospace;
+        }
+
+        .markdown-body {
+            margin-bottom: 50px !important;
+        }
     </style>
 </head>
+
 <body>
     <div class="docs-wrapper">
         <div class="container">
@@ -34,39 +97,38 @@
             </div>
         </div>
     </div>
-<script>
-    var dir = config('dir', ''),
-        repo = config('repo', 'yascmf/docs'),
-        branch = config('branch', 'master'),
-        index = config('index', 'index.md'),
-        home = config('home', 'README.md');
-    var config = {
-        //default git raw base url : https://raw.githubusercontent.com/
-        'base_url': 'https://raw.githubusercontent.com/',
-        'base_dir': dir,
-        'repo_name': repo,
-        //default branch name : master
-        'branch_name': branch,
-        'index_file': index,
-        'home_file': home,
-        //sider menu div id
-        'sider_id': 'sider-menu',
-        //markdown content div id
-        'content_id': 'content',
-    };
-    console.log(config);
-    var mv = new MarkdocViewer(config);
-    mv.viewer();
-    //highlight sider menu
-    setTimeout(function() {
-        var href = '?doc=' + request('doc');
-        var sider = mv.options['sider_id'];
-        // $('#' + sider + ' li').find('a[href="' + href + '"]').closest('li').addClass('active');
-        var targetLi = document.querySelector('#' + sider +' li a[href="' + href + '"]')
-        if (targetLi.parentElement) {
-            targetLi.parentElement.setAttribute('class', 'active')
-        }
-    }, 2000);
-</script>
+    <script>
+        var dir = config("dir", ""),
+            repo = config("repo", "yascmf/docs"),
+            branch = config("branch", "master"),
+            index = config("index", "index.md"),
+            home = config("home", "README.md");
+        var config = {
+            base_url: "https://raw.githubusercontent.com/",
+            base_dir: dir,
+            repo_name: repo,
+            branch_name: branch,
+            index_file: index,
+            home_file: home,
+            sider_id: "sider-menu",
+            content_id: "content",
+        };
+        console.log(config);
+        var mv = new MarkdocViewer(config);
+        mv.viewer();
+        // highlight sider menu
+        setTimeout(function () {
+            var href = "?doc=" + request("doc");
+            var sider = mv.options["sider_id"];
+            // $('#' + sider + ' li').find('a[href="' + href + '"]').closest('li').addClass('active');
+            var targetLi = document.querySelector(
+                "#" + sider + ' li a[href="' + href + '"]'
+            );
+            if (targetLi.parentElement) {
+                targetLi.parentElement.setAttribute("class", "active");
+            }
+        }, 2000);
+    </script>
 </body>
+
 </html>
