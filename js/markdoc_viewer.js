@@ -81,24 +81,8 @@ class MarkdocViewer {
       })
     );
 
-    // 自定义 renderer
-    const renderer = new marked.Renderer();
-    renderer.table = function (header, body) {
-      return (
-        '<table class="table table-bordered table-striped">\n' +
-        "<thead>\n" +
-        header +
-        "</thead>\n" +
-        "<tbody>\n" +
-        body +
-        "</tbody>\n" +
-        "</table>\n"
-      );
-    };
-
     // 设置选项
     markedInstance.setOptions({
-      renderer: renderer,
       gfm: true,
       breaks: false,
       pedantic: false,
