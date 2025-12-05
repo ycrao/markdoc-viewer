@@ -8,6 +8,7 @@
 
 - 阅读器相关配置存储到 `sessionStorage` 里，以支持多浏览器标签阅读不同文档。
 - `MarkdocViewer` 现已支持暗黑模式！点击页面右上角的 🌙/☀️ 按钮即可切换，自动检测系统偏好设置，用户偏好会被保存，下次访问时自动应用。
+- 修正 `Markdown` 文档渲染之后的图片链接地址，避免 404 不可见。
 
 ## 参数配置
 
@@ -64,9 +65,10 @@ mv.viewer();
 
 ## 在线文档阅读示例
 
-* [ycrao/my-notes](https://github.com/ycrao/mynotes)：[online link](https://raoyc.com/markdoc-viewer?doc=README.md&dir=&index=index.md&repo=ycrao/mynotes&home=README.md&branch=master)
-* [生死之外，皆是美好](https://github.com/XiaomingX/about_death)：[在线阅读链接](https://raoyc.com/markdoc-viewer?doc=./1.md&dir=&index=README.md&repo=XiaomingX/about_death&home=1.md&branch=main)
-
+* 我的笔记：原始仓库为[ycrao/my-notes](https://github.com/ycrao/mynotes)，[在线阅读🔗](https://raoyc.com/markdoc-viewer?doc=intro.md&dir=&index=index.md&repo=ycrao/mynotes&home=intro.md&branch=master)
+* 《生死之外，皆是美好》：原始仓库为[XiaomingX/about_death](https://github.com/XiaomingX/about_death)，[在线阅读🔗](https://raoyc.com/markdoc-viewer?doc=./1.md&dir=&index=README.md&repo=XiaomingX/about_death&home=1.md&branch=main)
+* 【译】《笨办法学C》：原始仓库为[wizardforcel/lcthw-zh](https://github.com/wizardforcel/lcthw-zh)，[在线阅读🔗](https://raoyc.com/markdoc-viewer?dir=&index=SUMMARY.md&repo=wizardforcel/lcthw-zh&home=README.md&branch=master)
+* 《ECMAScript 6入门》：原始仓库为[ruanyf/es6tutorial](https://github.com/ruanyf/es6tutorial)，[在线阅读🔗](https://raoyc.com/markdoc-viewer?dir=&index=SUMMARY.md&repo=ruanyf/es6tutorial&home=README.md&branch=gh-pages)
 
 ## 鸣谢
 

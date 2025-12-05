@@ -1,6 +1,6 @@
 // merge object, like es `{ ...a, b}`
 function merge(obj) {
-  var i = 1,
+  let i = 1,
     target,
     key;
   for (; i < arguments.length; i++) {
@@ -15,12 +15,12 @@ function merge(obj) {
 }
 // using modern api
 function request(key, defaultValue) {
-  var params = new URLSearchParams(window.location.search);
+  const params = new URLSearchParams(window.location.search);
   return params.has(key) ? params.get(key) : defaultValue;
 }
 // using localStorage api
 function _config(name, defaultValue) {
-  var cacheVal = defaultValue;
+  let cacheVal = defaultValue;
   if (request(name) == undefined) {
     cacheVal = window.localStorage.getItem(name)
       ? window.localStorage.getItem(name)
@@ -33,7 +33,7 @@ function _config(name, defaultValue) {
 }
 // using sessionStorage api
 function config(name, defaultValue) {
-  var cacheVal = defaultValue;
+  let cacheVal = defaultValue;
   if (request(name) == undefined) {
     cacheVal = window.sessionStorage.getItem(name)
       ? window.sessionStorage.getItem(name)
@@ -43,6 +43,18 @@ function config(name, defaultValue) {
     cacheVal = request(name);
   }
   return cacheVal;
+}
+// get directory url from a full url
+function getDirectoryUrl(url) {
+  try {
+    const u = new URL(url);
+    u.pathname = u.pathname.split('/').slice(0, -1).join('/') + '/';
+    if (u.pathname === '/') u.pathname = '/';
+    return u.toString();
+  } catch (e) {
+    const i = url.lastIndexOf('/');
+    return i === -1 ? '' : url.substring(0, i + 1);
+  }
 }
 
 // init options
@@ -58,10 +70,11 @@ var MarkdocViewer = function (opt) {
     content_id: "content",
   };
   this.options = merge(this.defaults, opt);
+  this.baseDirUrl = '';
 };
 // config marked options
 MarkdocViewer.prototype.marked = function () {
-  var renderer = new marked.Renderer();
+  const renderer = new marked.Renderer();
   renderer.table = function (header, body) {
     return (
       '<table class="table table-bordered table-striped">\n' +
@@ -93,31 +106,32 @@ MarkdocViewer.prototype.marked = function () {
 };
 // using fetch api
 MarkdocViewer.prototype.http_get = function (doc, success) {
-  var base_dir =
+  const base_dir =
     this.options["base_dir"] === "" ? "" : this.options["base_dir"] + "/";
-  var _base =
+  const _base =
     this.options["base_url"] +
     this.options["repo_name"] +
     "/" +
     this.options["branch_name"] +
     "/" +
     base_dir;
-  var _url = _base + doc;
+  const _url = _base + doc;
+  this.baseDirUrl = getDirectoryUrl(_url);
   fetch(_url)
     .then(function (resp) {
       return resp.text();
     })
     .then(function (resText) {
-      return success(resText);
+      return success(resText, _url);
     });
 };
 // render
 MarkdocViewer.prototype.viewer = function () {
-  var contentId = this.options["content_id"];
-  var siderId = this.options["sider_id"];
-  var marked = this.marked();
-  var indexFile = this.options["index_file"];
-  var docFile = request("doc");
+  const contentId = this.options["content_id"];
+  const siderId = this.options["sider_id"];
+  const marked = this.marked();
+  const indexFile = this.options["index_file"];
+  let docFile = request("doc");
   if (!docFile) {
     docFile = this.options["home_file"];
   }
@@ -133,6 +147,8 @@ MarkdocViewer.prototype.viewer = function () {
   this.http_get(docFile, function (resText) {
     // do some fliter
     // such as: DOMPurify <https://github.com/cure53/DOMPurify>
-    document.getElementById(contentId).innerHTML = marked.parse(resText);
+    let rendererHtml = marked.parse(resText);
+    // console.log("Rendered html: " + rendererHtml);
+    document.getElementById(contentId).innerHTML = rendererHtml;
   });
 };
