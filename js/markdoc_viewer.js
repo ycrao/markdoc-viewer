@@ -19,7 +19,7 @@ function request(key, defaultValue) {
   return params.has(key) ? params.get(key) : defaultValue;
 }
 // using localStorage api
-function config(name, defaultValue) {
+function _config(name, defaultValue) {
   var cacheVal = defaultValue;
   if (request(name) == undefined) {
     cacheVal = window.localStorage.getItem(name)
@@ -31,15 +31,29 @@ function config(name, defaultValue) {
   }
   return cacheVal;
 }
+// using sessionStorage api
+function config(name, defaultValue) {
+  var cacheVal = defaultValue;
+  if (request(name) == undefined) {
+    cacheVal = window.sessionStorage.getItem(name)
+      ? window.sessionStorage.getItem(name)
+      : defaultValue;
+  } else {
+    window.sessionStorage.setItem(name, request(name));
+    cacheVal = request(name);
+  }
+  return cacheVal;
+}
+
 // init options
 var MarkdocViewer = function (opt) {
   this.defaults = {
     base_url: "https://raw.githubusercontent.com/",
     base_dir: "",
-    repo_name: "yascmf/docs",
+    repo_name: "ycrao/mynotes",
     branch_name: "master",
     index_file: "index.md",
-    home_file: "README.md",
+    home_file: "intro.md",
     sider_id: "sider-menu",
     content_id: "content",
   };

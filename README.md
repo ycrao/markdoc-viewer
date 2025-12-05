@@ -1,9 +1,8 @@
 # MarkdocViewer
 
->   `MarkdocViewer` : reading markdown documentation from open git repository (just in one page) !
+> `MarkdocViewer` : reading markdown documentation from open git repository (just in one page) !
 
->   `MarkdocViewer` ：从公开的 `git` 仓库阅读 `markdown` 文档 （就一个页面）！
-
+> `MarkdocViewer` ：从公开的 `git` 仓库阅读 `markdown` 文档 （就一个页面）！
 
 ## 参数配置
 
@@ -17,13 +16,13 @@
     // document directory, default empty
     'base_dir': '',
     // git repo name, default 'yascmf/docs'
-    'repo_name': 'yascmf/docs',
+    'repo_name': 'ycrao/mynotes',
     // git branch name, default 'master'
     'branch_name': 'master',
     // index file name, using it to generate sider -nav menu
     'index_file': 'index.md',
     // home file name, default 'README.md'
-    'home_file': 'README.md',
+    'home_file': 'intro.md',
     // element id for left-sider or right-sider menu in HTML
     'sider_id': 'sider-menu',
     // element id for main content in HTML
@@ -33,16 +32,16 @@
 
 以上某些配置，可以通过传入查询串，予以重载新配置：
 
-`https://raoyc.com/markdoc-viewer?dir=&repo=yascmf/docs&branch=master&index=index.md&home=README.md`
+`hhttps://raoyc.com/markdoc-viewer?doc=intro.md&dir=&index=index.md&repo=ycrao/mynotes&home=intro.md&branch=master`
 
 其中，`dir` 查询串对应 `base_dir` 、`repo` 对应 `repo_name` 配置，后面依次类推。请保证，查询串值与仓库文档实际结构目录一致。
 
 ```javascript
 var dir = config('dir', ''),
-    repo = config('repo', 'yascmf/docs'),
+    repo = config('repo', 'ycrao/mynotes'),
     branch = config('branch', 'master'),
     index = config('index', 'index.md'),
-    home = config('home', 'readme.md');
+    home = config('home', 'intro.md');
 var config = {
     'base_url': 'https://raw.githubusercontent.com/',
     'base_dir': dir,
@@ -60,10 +59,8 @@ mv.viewer();
 
 ## 在线文档阅读示例
 
-*   [`YASCMF` 文档](https://github.com/yascmf/docs)：[online link](https://raoyc.com/markdoc-viewer?doc=README.md&dir=&index=index.md&repo=yascmf/docs&home=README.md)
-
-*   [`GitBookIO` 文档](https://github.com/GitbookIO/gitbook/tree/master/docs)：[online link](https://raoyc.com/markdoc-viewer?doc=README.md&dir=docs&index=SUMMARY.md&repo=GitbookIO/gitbook&home=README.md)
-
+* [my-notes](https://github.com/ycrao/mynotes)：[online link](https://raoyc.com/markdoc-viewer?doc=README.md&dir=&index=index.md&repo=ycrao/mynotes&home=README.md&branch=master)
+* 
 
 ## 鸣谢
 
