@@ -43,23 +43,23 @@
 其中，`dir` 查询串对应 `base_dir` 、`repo` 对应 `repo_name` 配置，后面依次类推。请保证，查询串值与仓库文档实际结构目录一致。
 
 ```javascript
-var dir = config('dir', ''),
-    repo = config('repo', 'ycrao/mynotes'),
-    branch = config('branch', 'master'),
-    index = config('index', 'index.md'),
-    home = config('home', 'intro.md');
-var config = {
-    'base_url': 'https://raw.githubusercontent.com/',
-    'base_dir': dir,
-    'repo_name': repo,
-    'branch_name': branch,
-    'index_file': index,
-    'home_file': home,
-    'sider_id': 'sider-menu',
-    'content_id': 'content',
+const dir = config("dir", ""),
+    repo = config("repo", "ycrao/mynotes"),
+    branch = config("branch", "master"),
+    index = config("index", "index.md"),
+    home = config("home", "intro.md");
+const options = {
+    base_url: "https://raw.githubusercontent.com/",
+    base_dir: dir,
+    repo_name: repo,
+    branch_name: branch,
+    index_file: index,
+    home_file: home,
+    sider_id: "sider-menu",
+    content_id: "content",
 };
 console.log(config);
-var mv = new MarkdocViewer(config);
+var mv = new MarkdocViewer(options);
 mv.viewer();
 ```
 
