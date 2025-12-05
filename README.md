@@ -38,7 +38,7 @@
 
 以上某些配置，可以通过传入查询串，予以重载新配置：
 
-`hhttps://raoyc.com/markdoc-viewer?doc=intro.md&dir=&index=index.md&repo=ycrao/mynotes&home=intro.md&branch=master`
+`https://raoyc.com/markdoc-viewer?doc=intro.md&dir=&index=index.md&repo=ycrao/mynotes&home=intro.md&branch=master`
 
 其中，`dir` 查询串对应 `base_dir` 、`repo` 对应 `repo_name` 配置，后面依次类推。请保证，查询串值与仓库文档实际结构目录一致。
 
@@ -65,10 +65,10 @@ mv.viewer();
 
 ## 在线文档阅读示例
 
-* 我的笔记：原始仓库为[ycrao/my-notes](https://github.com/ycrao/mynotes)，[在线阅读🔗](https://raoyc.com/markdoc-viewer?doc=intro.md&dir=&index=index.md&repo=ycrao/mynotes&home=intro.md&branch=master)
-* 《生死之外，皆是美好》：原始仓库为[XiaomingX/about_death](https://github.com/XiaomingX/about_death)，[在线阅读🔗](https://raoyc.com/markdoc-viewer?doc=./1.md&dir=&index=README.md&repo=XiaomingX/about_death&home=1.md&branch=main)
-* 【译】《笨办法学C》：原始仓库为[wizardforcel/lcthw-zh](https://github.com/wizardforcel/lcthw-zh)，[在线阅读🔗](https://raoyc.com/markdoc-viewer?dir=&index=SUMMARY.md&repo=wizardforcel/lcthw-zh&home=README.md&branch=master)
-* 《ECMAScript 6入门》：原始仓库为[ruanyf/es6tutorial](https://github.com/ruanyf/es6tutorial)，[在线阅读🔗](https://raoyc.com/markdoc-viewer?dir=&index=SUMMARY.md&repo=ruanyf/es6tutorial&home=README.md&branch=gh-pages)
+* 我的笔记：原始仓库为 [ycrao/my-notes](https://github.com/ycrao/mynotes) ，[在线阅读🔗](https://raoyc.com/markdoc-viewer?doc=intro.md&dir=&index=index.md&repo=ycrao/mynotes&home=intro.md&branch=master)
+* 《生死之外，皆是美好》：原始仓库为 [XiaomingX/about_death](https://github.com/XiaomingX/about_death) ，[在线阅读🔗](https://raoyc.com/markdoc-viewer?doc=./1.md&dir=&index=README.md&repo=XiaomingX/about_death&home=1.md&branch=main)
+* 【译】《笨办法学C》：原始仓库为 [wizardforcel/lcthw-zh](https://github.com/wizardforcel/lcthw-zh) ，[在线阅读🔗](https://raoyc.com/markdoc-viewer?dir=&index=SUMMARY.md&repo=wizardforcel/lcthw-zh&home=README.md&branch=master)
+* 《ECMAScript 6入门》：原始仓库为 [ruanyf/es6tutorial](https://github.com/ruanyf/es6tutorial) ，[在线阅读🔗](https://raoyc.com/markdoc-viewer?dir=&index=SUMMARY.md&repo=ruanyf/es6tutorial&home=README.md&branch=gh-pages)
 
 ## 鸣谢
 
