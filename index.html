@@ -10,10 +10,12 @@
         content="markdown document viewer, reading markdown documentation from open git repository (just in one page) " />
     <meta name="author" content="https://github.com/ycrao/markdoc-viewer" />
     <link href="./css/bootstrap_mdv.css" rel="stylesheet" />
-    <link href="./css/github-markdown-light.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.2.12/marked.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <link id="highlightJsTheme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet" />
+    <!-- 使用CDN最新版本的github-markdown-css -->
+    <link id="markdownCssTheme" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-light.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.3.0/lib/marked.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked-highlight/2.2.2/index.umd.min.js"></script>
+    <link id="highlightJsTheme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" rel="stylesheet" />
     <script type="text/javascript" src="./js/markdoc_viewer.js"></script>
     <style>
         body {
@@ -232,6 +234,37 @@
         .dark-mode-toggle:hover .dark-mode-icon {
             transform: rotate(180deg);
         }
+
+        /* 加载指示器样式 */
+        .loading-indicator {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        body.dark-mode .loading-indicator {
+            color: #8b949e;
+        }
+
+        body.dark-mode .spinner {
+            border-color: #21262d;
+            border-top-color: #58a6ff;
+        }
     </style>
 </head>
 
@@ -245,6 +278,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-7 col-sm-6">
+                    <div class="loading-indicator" id="loadingIndicator" style="display: none;">
+                        <div class="spinner"></div>
+                        <p>正在加载文档...</p>
+                    </div>
                     <article class="markdown-body" id="content">
                         <!-- md_doc_body -->
                     </article>
@@ -282,17 +319,20 @@
             const darkModeIcon = document.getElementById('darkModeIcon');
             const isDarkMode = body.classList.contains('dark-mode');
             const themeLink = document.getElementById('highlightJsTheme');
+            const markdownCssLink = document.getElementById('markdownCssTheme');
 
             if (isDarkMode) {
                 body.classList.remove('dark-mode');
                 darkModeIcon.textContent = '🌙';
                 localStorage.setItem('darkMode', 'false');
-                themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css';
+                themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css';
+                markdownCssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-light.min.css';
             } else {
                 body.classList.add('dark-mode');
                 darkModeIcon.textContent = '☀️';
                 localStorage.setItem('darkMode', 'true');
-                themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css';
+                themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css';
+                markdownCssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.min.css';
             }
         }
 
@@ -301,12 +341,14 @@
             const savedMode = localStorage.getItem('darkMode');
             const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             const themeLink = document.getElementById('highlightJsTheme');
+            const markdownCssLink = document.getElementById('markdownCssTheme');
 
             // 检查本地存储或系统偏好
             if (savedMode === 'true' || (savedMode === null && prefersDark)) {
                 document.body.classList.add('dark-mode');
                 document.getElementById('darkModeIcon').textContent = '☀️';
-                themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css';
+                themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css';
+                markdownCssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.min.css';
             }
         }
 
