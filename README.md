@@ -4,6 +4,11 @@
 
 > `MarkdocViewer` ：从公开的 `git` 仓库阅读 `markdown` 文档 （就一个页面）！
 
+## 新功能特性
+
+- 阅读器相关配置存储到 `sessionStorage` 里，以支持多浏览器标签阅读不同文档。
+- `MarkdocViewer` 现已支持暗黑模式！点击页面右上角的 🌙/☀️ 按钮即可切换，自动检测系统偏好设置，用户偏好会被保存，下次访问时自动应用。
+
 ## 参数配置
 
 `MarkdocViewer` 默认配置如下：
@@ -59,8 +64,9 @@ mv.viewer();
 
 ## 在线文档阅读示例
 
-* [my-notes](https://github.com/ycrao/mynotes)：[online link](https://raoyc.com/markdoc-viewer?doc=README.md&dir=&index=index.md&repo=ycrao/mynotes&home=README.md&branch=master)
-* 
+* [ycrao/my-notes](https://github.com/ycrao/mynotes)：[online link](https://raoyc.com/markdoc-viewer?doc=README.md&dir=&index=index.md&repo=ycrao/mynotes&home=README.md&branch=master)
+* [生死之外，皆是美好](https://github.com/XiaomingX/about_death)：[在线阅读链接](https://raoyc.com/markdoc-viewer?doc=./1.md&dir=&index=README.md&repo=XiaomingX/about_death&home=1.md&branch=main)
+
 
 ## 鸣谢
 

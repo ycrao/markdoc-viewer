@@ -13,7 +13,7 @@
     <link href="css/github-markdown-light.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.2.12/marked.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet" />
+    <link id="highlightJsTheme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css" rel="stylesheet" />
     <script type="text/javascript" src="js/markdoc_viewer.js"></script>
     <style>
         body {
@@ -22,6 +22,7 @@
                 Helvetica, "Hiragino Sans GB", "Microsoft Yahei", Arial, sans-serif,
                 "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
             -webkit-font-smoothing: antialiased;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         body.md-doc {
@@ -71,13 +72,175 @@
             font-family: "Courier New", Courier, monospace;
         }
 
+        /* 确保移动端适配 */
+        @media (max-width: 768px) {
+            .dark-mode-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 6px;
+                width: 38px;
+                height: 38px;
+                font-size: 16px;
+            }
+        }
+
         .markdown-body {
             margin-bottom: 50px !important;
+        }
+
+        /* 暗黑模式样式 */
+        body.dark-mode {
+            background-color: #0d1117;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .markdown-body {
+            color: #c9d1d9;
+            background-color: #0d1117;
+        }
+
+        body.dark-mode .markdown-body h1,
+        body.dark-mode .markdown-body h2,
+        body.dark-mode .markdown-body h3,
+        body.dark-mode .markdown-body h4,
+        body.dark-mode .markdown-body h5,
+        body.dark-mode .markdown-body h6 {
+            color: #c9d1d9 !important;
+            border-bottom-color: #21262d !important;
+        }
+
+        body.dark-mode .markdown-body a {
+            color: #58a6ff;
+        }
+
+        body.dark-mode .markdown-body a:hover {
+            color: #79c0ff;
+        }
+
+        body.dark-mode .docs-nav {
+            background-color: #0d1117 !important;
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .docs-nav h3 {
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .docs-nav ul li {
+            color: #8b949e;
+        }
+
+        body.dark-mode .docs-nav ul li>a {
+            color: #8b949e;
+        }
+
+        body.dark-mode .docs-nav ul li.active a,
+        body.dark-mode .docs-nav ul li>a:hover {
+            color: #c9d1d9;
+        }
+
+        body.dark-mode .bg-info {
+            background-color: #0d1117 !important;
+        }
+
+        body.dark-mode .table-bordered {
+            border-color: #30363d;
+        }
+
+        body.dark-mode .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(240, 246, 252, 0.05);
+        }
+
+        body.dark-mode .markdown-body table th,
+        body.dark-mode .markdown-body table td {
+            border-color: #30363d;
+        }
+
+        body.dark-mode .markdown-body table tr {
+            background-color: #0d1117;
+            border-top-color: #30363d;
+        }
+
+        body.dark-mode .markdown-body table tr:nth-child(2n) {
+            background-color: #161b22;
+        }
+
+        body.dark-mode pre {
+            background-color: #161b22;
+            border-color: #30363d;
+        }
+
+        body.dark-mode code {
+            /*background-color: rgba(240, 246, 252, 0.15);*/
+            color: #c9d1d9;
+        }
+
+        body.dark-mode blockquote {
+            color: #8b949e;
+            border-left-color: #3fb950;
+            background-color: #161b22;
+        }
+
+        body.dark-mode .markdown-body img {
+            background-color: transparent;
+        }
+
+        /* 暗黑模式切换按钮 */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 10px;
+            background-color: #f6f8fa;
+            border: 1px solid #d1d9e0;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .dark-mode-toggle {
+            background-color: #21262d;
+            border-color: #30363d;
+            color: #c9d1d9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: #e9ecef;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        body.dark-mode .dark-mode-toggle:hover {
+            background-color: #30363d;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .dark-mode-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover .dark-mode-icon {
+            transform: rotate(180deg);
         }
     </style>
 </head>
 
 <body>
+    <!-- 暗黑模式切换按钮 -->
+    <button class="dark-mode-toggle" id="darkModeToggle" title="切换暗黑模式">
+        <span class="dark-mode-icon" id="darkModeIcon">🌙</span>
+    </button>
+
     <div class="docs-wrapper">
         <div class="container">
             <div class="row">
@@ -99,10 +262,10 @@
     </div>
     <script>
         var dir = config("dir", ""),
-            repo = config("repo", "yascmf/docs"),
+            repo = config("repo", "ycrao/mynotes"),
             branch = config("branch", "master"),
             index = config("index", "index.md"),
-            home = config("home", "README.md");
+            home = config("home", "intro.md");
         var config = {
             base_url: "https://raw.githubusercontent.com/",
             base_dir: dir,
@@ -114,6 +277,46 @@
             content_id: "content",
         };
         console.log(config);
+        // 暗黑模式切换功能
+        function toggleDarkMode() {
+            const body = document.body;
+            const darkModeIcon = document.getElementById('darkModeIcon');
+            const isDarkMode = body.classList.contains('dark-mode');
+            const themeLink = document.getElementById('highlightJsTheme');
+
+            if (isDarkMode) {
+                body.classList.remove('dark-mode');
+                darkModeIcon.textContent = '🌙';
+                localStorage.setItem('darkMode', 'false');
+                themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github.min.css';
+            } else {
+                body.classList.add('dark-mode');
+                darkModeIcon.textContent = '☀️';
+                localStorage.setItem('darkMode', 'true');
+                themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css';
+            }
+        }
+
+        // 初始化暗黑模式
+        function initDarkMode() {
+            const savedMode = localStorage.getItem('darkMode');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const themeLink = document.getElementById('highlightJsTheme');
+
+            // 检查本地存储或系统偏好
+            if (savedMode === 'true' || (savedMode === null && prefersDark)) {
+                document.body.classList.add('dark-mode');
+                document.getElementById('darkModeIcon').textContent = '☀️';
+                themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/github-dark.min.css';
+            }
+        }
+
+        // 绑定切换按钮事件
+        document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', initDarkMode);
+
         var mv = new MarkdocViewer(config);
         mv.viewer();
         // highlight sider menu
@@ -127,7 +330,7 @@
             if (targetLi != null && targetLi.parentElement != null) {
                 targetLi.parentElement.setAttribute("class", "active");
             }
-        }, 2000);
+        }, 1000);
     </script>
 </body>
 
