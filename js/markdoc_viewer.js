@@ -104,7 +104,7 @@ class MarkdocViewer {
   }
 
   // using fetch api with error handling
-  http_get(doc, success, error) {
+  httpGet(doc, success, error) {
     const base_dir =
       this.options["base_dir"] === "" ? "" : this.options["base_dir"] + "/";
     const _base =
@@ -148,7 +148,7 @@ class MarkdocViewer {
     this.showLoading(true);
 
     // get index file to generate menu
-    this.http_get(indexFile, function (menuText) {
+    this.httpGet(indexFile, function (menuText) {
       var menuText = marked.parse(menuText);
       // 修复正则表达式 - 移除不必要的转义
       var pattern = new RegExp('href="([\\w_\\-/#.]+)"', "gi");
@@ -160,7 +160,7 @@ class MarkdocViewer {
 
     // render document
     var self = this;
-    this.http_get(docFile, function (resText) {
+    this.httpGet(docFile, function (resText) {
       // do some fliter
       let rendererHtml = marked.parse(resText);
       document.getElementById(contentId).innerHTML = rendererHtml;

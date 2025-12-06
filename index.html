@@ -10,12 +10,11 @@
         content="markdown document viewer, reading markdown documentation from open git repository (just in one page) " />
     <meta name="author" content="https://github.com/ycrao/markdoc-viewer" />
     <link href="./css/bootstrap_mdv.css" rel="stylesheet" />
-    <!-- 使用CDN最新版本的github-markdown-css -->
-    <link id="markdownCssTheme" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-light.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.3.0/lib/marked.umd.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked-highlight/2.2.2/index.umd.min.js"></script>
-    <link id="highlightJsTheme" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" rel="stylesheet" />
+    <link id="markdownCssTheme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-light.min.css" integrity="sha512-X175XRJAO6PHAUi8AA7GP8uUF5Wiv+w9bOi64i02CHKDQBsO1yy0jLSKaUKg/NhRCDYBmOLQCfKaTaXiyZlLrw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/16.3.0/lib/marked.umd.min.js" integrity="sha512-V6rGY7jjOEUc7q5Ews8mMlretz1Vn2wLdMW/qgABLWunzsLfluM0FwHuGjGQ1lc8jO5vGpGIGFE+rTzB+63HdA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js" integrity="sha512-EBLzUL8XLl+va/zAsmXwS7Z2B1F9HUHkZwyS/VKwh3S7T/U0nF4BaU29EP/ZSf6zgiIxYAnKLu6bJ8dqpmX5uw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked-highlight/2.2.2/index.umd.min.js" integrity="sha512-T5TNAGHd65imlc6xoRDq9hARHowETqOlOGMJ443E+PohphJHbzPpwQNBtcpmcjmHmQKLctZ/W3H2cY/T8EGDPA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link id="highlightJsTheme" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css" integrity="sha512-0aPQyyeZrWj9sCA46UlmWgKOP0mUipLQ6OZXu8l4IcAmD2u31EPEy9VcIMvl7SoAaKe8bLXZhYoMaE/in+gcgA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script type="text/javascript" src="./js/markdoc_viewer.js"></script>
     <style>
         body {
@@ -298,6 +297,19 @@
         </div>
     </div>
     <script>
+        function setStylesheet(linkId, newHref, newIntegrity = '') {
+            const oldLink = document.getElementById(linkId);
+            const newLink = document.createElement('link');
+            newLink.id = linkId;
+            newLink.rel = 'stylesheet';
+            newLink.href = newHref;
+            if (newIntegrity) newLink.integrity = newIntegrity;
+            newLink.crossOrigin = 'anonymous';
+
+            // 替换方式：先插入新节点，再删除旧节点（避免白屏）
+            oldLink.parentNode.insertBefore(newLink, oldLink);
+            oldLink.parentNode.removeChild(oldLink);
+        }
         const dir = config("dir", ""),
             repo = config("repo", "ycrao/mynotes"),
             branch = config("branch", "master"),
@@ -325,14 +337,22 @@
                 body.classList.remove('dark-mode');
                 darkModeIcon.textContent = '🌙';
                 localStorage.setItem('darkMode', 'false');
-                themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css';
-                markdownCssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-light.min.css';
+                setStylesheet('highlightJsTheme', 
+        'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github.min.css',
+        'sha512-0aPQyyeZrWj9sCA46UlmWgKOP0mUipLQ6OZXu8l4IcAmD2u31EPEy9VcIMvl7SoAaKe8bLXZhYoMaE/in+gcgA==');
+                setStylesheet('markdownCssTheme',
+        'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-light.min.css',
+        'sha512-X175XRJAO6PHAUi8AA7GP8uUF5Wiv+w9bOi64i02CHKDQBsO1yy0jLSKaUKg/NhRCDYBmOLQCfKaTaXiyZlLrw==');
             } else {
                 body.classList.add('dark-mode');
                 darkModeIcon.textContent = '☀️';
                 localStorage.setItem('darkMode', 'true');
-                themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css';
-                markdownCssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.min.css';
+                setStylesheet('highlightJsTheme', 
+        'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css',
+        'sha512-rO+olRTkcf304DQBxSWxln8JXCzTHlKnIdnMUwYvQa9/Jd4cQaNkItIUj6Z4nvW1dqK0SKXLbn9h4KwZTNtAyw==');
+                setStylesheet('markdownCssTheme',
+        'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.min.css',
+        'sha512-OtEVQKlou4M/GacGwvUl27uo+XNyHfUlMP/furdKClgpkU++3SepORomgRC1uV7qjJ5fnV8ENVt2qXkR8enD1w==');
             }
         }
 
@@ -347,8 +367,12 @@
             if (savedMode === 'true' || (savedMode === null && prefersDark)) {
                 document.body.classList.add('dark-mode');
                 document.getElementById('darkModeIcon').textContent = '☀️';
-                themeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css';
-                markdownCssLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.min.css';
+                setStylesheet('highlightJsTheme', 
+        'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/github-dark.min.css',
+        'sha512-rO+olRTkcf304DQBxSWxln8JXCzTHlKnIdnMUwYvQa9/Jd4cQaNkItIUj6Z4nvW1dqK0SKXLbn9h4KwZTNtAyw==');
+                setStylesheet('markdownCssTheme',
+        'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.min.css',
+        'sha512-OtEVQKlou4M/GacGwvUl27uo+XNyHfUlMP/furdKClgpkU++3SepORomgRC1uV7qjJ5fnV8ENVt2qXkR8enD1w==');
             }
         }
 
